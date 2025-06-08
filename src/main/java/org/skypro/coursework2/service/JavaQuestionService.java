@@ -45,7 +45,7 @@ public class JavaQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
         if (questions.isEmpty()) {
-            return null; // or throw an exception
+            return null;
         }
         int randomIndex = random.nextInt(questions.size());
         return new ArrayList<>(questions).get(randomIndex);

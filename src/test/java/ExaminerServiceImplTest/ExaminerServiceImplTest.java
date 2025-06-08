@@ -37,19 +37,22 @@ public class ExaminerServiceImplTest {
         questions.add(new Question("Question 3", "Answer 3"));
 
         when(questionService.getAll()).thenReturn(questions);
-        when(questionService.getRandomQuestion()).thenReturn(questions.iterator().next()); // Always return the first question for simplicity
+        when(questionService.getRandomQuestion()).thenReturn(questions.iterator().next());
     }
 
     @Test
     void getQuestions_shouldReturnCorrectNumberOfUniqueQuestions() {
         int amount = 2;
+
         Collection<Question> examQuestions = examinerService.getQuestions(amount);
+
         assertEquals(amount, examQuestions.size());
     }
 
     @Test
     void getQuestions_shouldThrowBadRequestExceptionWhenAmountIsInvalid() {
-        int amount = 4; // More than available questions
+        int amount = 4;
+
         assertThrows(ResponseStatusException.class, () -> examinerService.getQuestions(amount));
     }
 
@@ -57,6 +60,7 @@ public class ExaminerServiceImplTest {
     void getQuestions_shouldReturnEmptySetWhenNoQuestionsAvailable() {
         when(questionService.getAll()).thenReturn(new HashSet<>());
         int amount = 1;
+
         assertThrows(ResponseStatusException.class, () -> examinerService.getQuestions(amount));
     }
 }

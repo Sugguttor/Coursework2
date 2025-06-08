@@ -11,25 +11,25 @@ import java.util.Set;
 
 
 @Service
-    public class ExaminerServiceImpl implements ExaminerService {
+public class ExaminerServiceImpl implements ExaminerService {
 
-        private final QuestionService questionService;
+    private final QuestionService questionService;
 
-        public ExaminerServiceImpl(QuestionService questionService) {
-            this.questionService = questionService;
-        }
-
-        @Override
-        public Collection<Question> getQuestions(int amount) {
-            if (amount <= 0 || amount > questionService.getAll().size()) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid amount of questions requested.");
-            }
-
-            Set<Question> questions = new HashSet<>();
-            while (questions.size() < amount) {
-                questions.add(questionService.getRandomQuestion());
-            }
-            return questions;
-        }
+    public ExaminerServiceImpl(QuestionService questionService) {
+        this.questionService = questionService;
     }
+
+    @Override
+    public Collection<Question> getQuestions(int amount) {
+        if (amount <= 0 || amount > questionService.getAll().size()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid amount of questions requested.");
+        }
+
+        Set<Question> questions = new HashSet<>();
+        while (questions.size() < amount) {
+            questions.add(questionService.getRandomQuestion());
+        }
+        return questions;
+    }
+}
 
