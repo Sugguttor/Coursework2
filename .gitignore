@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 *.iml
 .idea
+out
 
 ### STS ###
 .apt_generated
